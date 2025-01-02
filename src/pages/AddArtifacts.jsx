@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const AddArtifacts = () => {
+  const {user}= useContext(AuthContext)
   const handleAddArtifacts = (e) => {
     e.preventDefault();
     // name,photo,artifactType,historicalContext,createdAt,discoveredAt,presentLocation
@@ -12,8 +14,18 @@ const AddArtifacts = () => {
     const createdAt= form.createdAt.value;
     const discoveredAt= form.discoveredAt.value;
     const presentLocation= form.presentLocation.value;
-    const datas= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation};
+    const addedBy= {name:` ${user?.displayName}`, email:` ${user?.email} `}
+    const datas= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation,addedBy};
     console.log(datas);
+
+    // !POST operation
+    fetch('http://localhost:5000/allArtifacts',{
+      method:'POST',
+      headers:{'content-type': 'application/json'},
+      body: JSON.stringify(datas)
+    })
+    .then(res=>res.json())
+    .then(data=>{console.log(data)})
   };
   
   return (
@@ -66,7 +78,7 @@ const AddArtifacts = () => {
               Artifact Type
             </label>
             <select name="artifactType" className="select select-accent w-full ">
-              <option disabled selected>Dark mode or light mode?</option>
+              {/* <option disabled selected>Dark mode or light mode?</option> */}
               <option>Tools</option>
               <option>Weapons</option>
               <option>Documents</option>
@@ -150,9 +162,11 @@ const AddArtifacts = () => {
             <input
               type="text"
               name="artifactAdder"
-              className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="will be default value from loggedin user"
+              className="select-accent text-gray-500 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              // placeholder="will be default value from loggedin user"
+              defaultValue={`Name: ${user.displayName}, Email: ${user.email}`}
               readOnly
+              
             />
           </div>
 
