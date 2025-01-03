@@ -15,17 +15,21 @@ const AddArtifacts = () => {
     const discoveredAt= form.discoveredAt.value;
     const presentLocation= form.presentLocation.value;
     const addedBy= {name:` ${user?.displayName}`, email:` ${user?.email} `}
-    const datas= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation,addedBy};
-    console.log(datas);
+    const data= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation,addedBy,like:0};
+    console.log(data);
 
     // !POST operation
     fetch('http://localhost:5000/allArtifacts',{
       method:'POST',
       headers:{'content-type': 'application/json'},
-      body: JSON.stringify(datas)
+      body: JSON.stringify(data)
     })
     .then(res=>res.json())
-    .then(data=>{console.log(data)})
+    .then(data=>{
+      if(data.insertedId){
+        alert('insrted data successfully')
+      }
+      console.log(data)})
   };
   
   return (

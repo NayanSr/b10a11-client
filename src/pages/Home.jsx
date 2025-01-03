@@ -1,12 +1,19 @@
 import React from 'react';
 import Slider from '../components/Slider';
+import { useLoaderData } from 'react-router-dom';
+import ArtifactsCart from '../components/ArtifactsCart';
 
 const Home = () => {
+    const topSixData= useLoaderData();
     return (
-        <div>
+        <div className=''>
             <Slider/>
-            <h3 className='text-2xl mt-2 text-center'>Home PagE. <span className='bg-yellow-300'><span className='bg-red-700 text-white rounded-full px-2 mr-2'>7. </span>This section will show a maximum of 6 Artifacts with
-            the highest like count.</span></h3>
+            <div className='mt-4 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
+
+            {
+                topSixData.map(sd=><ArtifactsCart artifact={sd}></ArtifactsCart>)
+            }
+            </div>
         </div>
     );
 };

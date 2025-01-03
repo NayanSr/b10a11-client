@@ -55,24 +55,24 @@ const Navbar = () => {
       <div className="navbar-end">
         <img
           src="https://i.ibb.co.com/gJkJ3bL/S-1.jpg"
-          className="w-8 h-8  rounded-lg"
+          className="w-8 h-8  rounded-lg hidden sm:block"
           alt="User Image"
           title="User Name"
         />
-        <Link to='/login' className="btn btn-sm text-lg bg-gray-200 text-orange-500 hover:bg-green-100 mx-4">
+        <Link to='/login' className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100 mx-1 md:mx-4">
           Login
         </Link>
-        <Link className="btn btn-sm text-lg bg-gray-200 text-orange-500 hover:bg-green-100">
+        <Link className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100">
           Logout
         </Link>
-        <Link to='/register' className="btn btn-sm text-lg bg-gray-200 text-orange-500 hover:bg-green-100 ml-4">
+        <Link to='/register' className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100 md:ml-4">
           Register
 
           
         </Link>
         <details className="dropdown dropdown-end dropdown-bottom ">
         
-          <summary className="btn btn-sm bg-purple-200 m-1 text-lg hover:bg-purple-600 hover:text-white">
+          <summary className="btn btn-sm bg-purple-200 m-1 text-sm md:text-lg hover:bg-purple-600 hover:text-white">
             Profile
           </summary>
           <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
