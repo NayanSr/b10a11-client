@@ -75,9 +75,9 @@ const Navbar = () => {
           <summary className="btn btn-sm bg-purple-200 m-1 text-sm md:text-lg hover:bg-purple-600 hover:text-white">
             Profile
           </summary>
-          <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-            <Link>My Artifacts (Private/Protected Route)</Link>
-            <Link>Liked Artifacts (Private/Protected Route)</Link>
+          <ul className="menu bg-green-50 dropdown-content  rounded-box z-[1] w-52 p-2 shadow">
+            <Link to='/my-artifacts' className='bg-orange-50 font-semibold p-2 rounded-t-xl hover:bg-yellow-200'>My Artifacts (Private/Protected Route)</Link>
+            <Link to='/my-liked' className='bg-orange-50 font-semibold p-2 rounded-b-xl hover:bg-yellow-200'>Liked Artifacts (Private/Protected Route)</Link>
           </ul>
         </details>
       </div>
