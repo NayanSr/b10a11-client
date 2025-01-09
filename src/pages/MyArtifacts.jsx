@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const MyArtifacts = () => {
   const [myArtifacts, setMyArtifacts] = useState([]);
@@ -10,7 +11,7 @@ const MyArtifacts = () => {
       .then((res) => res.json())
       .then((data) => {
         setMyArtifacts(data);
-        console.log(data);
+        // console.log(data);
       });
   }, [user?.email]);
 
@@ -38,9 +39,13 @@ const MyArtifacts = () => {
             </div>
 
             <div className="flex   sm:flex-col mt-4 sm:mt-0 gap-2 ">
-              <button className="bg-green-700 px-4 py-1 rounded-md text-base font-semibold text-white">
-                Update
-              </button>
+              <Link
+                className="bg-green-700 px-4 py-1 rounded-md text-base font-semibold text-white"
+                to={`/updateArtifact/${sa._id}`}
+              >
+                <button>Update</button>
+              </Link>
+
               <button className="bg-red-600 px-4 py-1 rounded-md text-base font-semibold text-white">
                 Delete
               </button>

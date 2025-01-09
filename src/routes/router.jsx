@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import ArtifactsDetails from "../components/ArtifactsDetails";
 import MyArtifacts from "../pages/MyArtifacts";
 import LikedArtifacts from "../pages/LikedArtifacts";
+import UpdateArtifact from "../pages/UpdateArtifact";
 
 
 const router= createBrowserRouter([
@@ -23,6 +24,7 @@ const router= createBrowserRouter([
             {path:'my-artifacts', element:<MyArtifacts/>},
             {path:'my-liked', element:<LikedArtifacts/>},
             {path:'addArtifacts', element:<AddArtifacts/>},
+            {path:`updateArtifact/:id`, element:<UpdateArtifact/>},
             {path:'login', element:<Login/>},
             {path:'register', element:<Register/>},
         ]
