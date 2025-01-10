@@ -15,8 +15,8 @@ const AddArtifacts = () => {
     const discoveredAt= form.discoveredAt.value;
     const presentLocation= form.presentLocation.value;
     const addedBy= {name:` ${user?.displayName}`, email:` ${user?.email} `};
-    const adderPersonEmail= `${user?.email}`
-    const data= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation,addedBy,adderPersonEmail,like:0};
+    const addedPersonEmail= `${user?.email}`
+    const data= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation,addedBy,addedPersonEmail,like:0};
     console.log(data);
 
     // !POST operation

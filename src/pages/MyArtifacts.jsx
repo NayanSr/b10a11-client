@@ -15,10 +15,31 @@ const MyArtifacts = () => {
       });
   }, [user?.email]);
 
+
+  const handleDelete=id=>{
+
+    
+    fetch(`http://localhost:5000/allArtifacts?id=${id}`,{
+      method:'DELETE',
+      headers:{'content-type':'application/json'}
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      if(data.deletedCount){
+        const restArtifact= myArtifacts.filter(sa=>sa._id !==id);
+        setMyArtifacts(restArtifact);
+        console.log(restArtifact);
+        alert('deleted Successfully')
+      }
+      console.log(data)})
+    // console.log(id);
+  }
+
   return (
     <div>
       All my Added art...........{myArtifacts.length}
       <div className="">
+
         {myArtifacts.map((sa) => (
           <div
             key={sa._id}
@@ -46,7 +67,7 @@ const MyArtifacts = () => {
                 <button>Update</button>
               </Link>
 
-              <button className="bg-red-600 px-4 py-1 rounded-md text-base font-semibold text-white">
+              <button onClick={()=>handleDelete(sa._id)} className="bg-red-600 px-4 py-1 rounded-md text-base font-semibold text-white">
                 Delete
               </button>
             </div>
