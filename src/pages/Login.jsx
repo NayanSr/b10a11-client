@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import googleIcon from '../assets/googleIcon.png'
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
     const handleLogin=e=>{
@@ -10,7 +12,13 @@ const Login = () => {
         const user= {email,password}
         console.log(user)
 
-        //! After successful login use a sweet alert to show success 
+        //TODO: After successful login use a sweet alert to show success 
+    }
+
+    const {googleLogin}= useContext(AuthContext)
+
+    const handleGoogleLogin=()=>{
+          googleLogin()
     }
 
     return (
@@ -59,7 +67,7 @@ const Login = () => {
           </form>
           <div className="text-center bg-teal-200 rounded-lg mt-4 flex justify-evenly px-12 hover:bg-teal-400">
             <img className="w-8 h-8" src={googleIcon} alt="" />
-            <button className="py-1 text-lg text-purple-800 font-semibold">Google Signin</button>
+            <button onClick={handleGoogleLogin} className="py-1 text-lg text-purple-800 font-semibold">Google Signin</button>
           </div>
           <div className="mt-4 text-center">
             <p>

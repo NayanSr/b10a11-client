@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyArtifacts = () => {
   const [myArtifacts, setMyArtifacts] = useState([]);
@@ -18,21 +19,52 @@ const MyArtifacts = () => {
 
   const handleDelete=id=>{
 
-    
-    fetch(`http://localhost:5000/allArtifacts?id=${id}`,{
-      method:'DELETE',
-      headers:{'content-type':'application/json'}
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      if(data.deletedCount){
-        const restArtifact= myArtifacts.filter(sa=>sa._id !==id);
-        setMyArtifacts(restArtifact);
-        console.log(restArtifact);
-        alert('deleted Successfully')
+
+
+
+    Swal.fire({
+      title: "Are you sure to delete?",
+      text: "You won't be able to revert this!",
+      // icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+
+//!start
+fetch(`http://localhost:5000/allArtifacts?id=${id}`,{
+  method:'DELETE',
+  headers:{'content-type':'application/json'}
+})
+.then(res=>res.json())
+.then(data=>{
+  if(data.deletedCount){
+    const restArtifact= myArtifacts.filter(sa=>sa._id !==id);
+    setMyArtifacts(restArtifact);
+    console.log(restArtifact);
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+  }})
+
+
+//!end
+
+
+       
       }
-      console.log(data)})
-    // console.log(id);
+    });
+
+
+
+
+   
+   
   }
 
   return (
