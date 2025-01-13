@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
+  const {emailPasswordRegistration}= useContext(AuthContext)
 
     const handleRegisterSubmit=e=>{
       e.preventDefault();
@@ -12,6 +15,10 @@ const Register = () => {
       const regex =(/^(?=.*[A-Z])(?=.*[a-z]).{6,}$/).test(password);
       if(regex){
         alert(`Right Password, ${password}, Now can register & replace this alert by sweet alert`);
+        emailPasswordRegistration(email,password)
+        .then(data=>{
+          console.log(data.user);
+        })
         return;
       }
       else{

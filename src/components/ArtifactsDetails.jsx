@@ -17,17 +17,23 @@ const ArtifactsDetails = () => {
     addedBy,
     like,
   } = data;
-  const[isExist,setIsExist]=useState()
+  const[isExist,setIsExist]=useState();
   const { user } = useContext(AuthContext);
+  
   const [newCount, setNewCount] = useState(like);
-  const [likedArtifacts, setLikedArtifacts] = useState([]);
+  // const [likedArtifacts, setLikedArtifacts] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:5000/all-liked")
       .then((res) => res.json())
       .then(async (data) => {
-        setLikedArtifacts(data);
-        const checkId= data.find((sd) => sd.artifactsId == _id);
-        const check= await checkId?.email==user?.email
+        // setLikedArtifacts(data);
+        console.log(user);
+        console.log(data);
+        const checkId= data.filter((sd) => sd.artifactsId == _id);
+        console.log(checkId);
+        // const check= await checkId?.email == user?.email
+        const check= await checkId?.find(sd=>sd.email == user?.email)
         setIsExist(check);
 
         console.log(isExist, 'check: ',check);
@@ -134,7 +140,7 @@ const ArtifactsDetails = () => {
             
             className=" flex items-center ml-16 bg-orange-600 text-white px-6 py-1 my-1 rounded-md"
           >
-            Thanks for liked
+            Thanks for your like
           </p>
         )}
       </section>

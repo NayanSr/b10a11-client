@@ -10,7 +10,7 @@ const {user}= useContext(AuthContext);
            <Navbar/>
            {/* <Slider/> */}
            <br />
-           <h2>Name: {user.displayName}</h2>
+           <h2>Name: {user?.displayName}</h2>
            <br />
         </div>
     );

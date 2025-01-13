@@ -1,21 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleIcon from '../assets/googleIcon.png'
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
+  const navigate= useNavigate();
+  const {googleLogin,emailPasswordLogin}= useContext(AuthContext)
     const handleLogin=e=>{
         e.preventDefault();
         const form= e.target;
         const email=form.email.value;
         const password= form.password.value;
-        const user= {email,password}
-        console.log(user)
-
+        emailPasswordLogin(email, password)
+        .then(data=>{
+          console.log(data.user);
+          // navigate('/')
+        })
+        
+        
         //TODO: After successful login use a sweet alert to show success 
     }
 
-    const {googleLogin}= useContext(AuthContext)
+    
 
     const handleGoogleLogin=()=>{
           googleLogin()

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Slider from "../components/Slider";
 import { Link, useLoaderData } from "react-router-dom";
 import ArtifactsCart from "../components/ArtifactsCart";
 import NoData from "../components/NoData";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Home = () => {
   const topSixData = useLoaderData();
+  const {user}= useContext(AuthContext);
+  console.log(user);
   return (
     <div className="">
       <Slider />

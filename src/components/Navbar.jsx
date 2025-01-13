@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import '../components/css/nav.css';
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 
 
 const Navbar = () => {
-
+const {user}= useContext(AuthContext);
+console.log(user, user?.photoURL);
+const {logout}= useContext(AuthContext);
+const handleLogout=()=>{
+  logout()
+}
   
 
   const navigationLinks = (
@@ -53,23 +59,29 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navigationLinks}</ul>
       </div>
       <div className="navbar-end">
-        <img
-          src="https://i.ibb.co.com/gJkJ3bL/S-1.jpg"
-          className="w-8 h-8  rounded-lg hidden sm:block"
+        
+      {user?.email? <img
+          src={user?.photoURL}
+          className="w-8 h-8  rounded-lg hidden sm:block mr-2"
           alt="User Image"
-          title="User Name"
-        />
-        <Link to='/login' className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100 mx-1 md:mx-4">
+          title={user?.email}
+        /> : ''
+
+      }
+
+        {!user?.email? <Link to='/login' className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100 mx-1 md:mx-4">
           Login
         </Link>
-        <Link className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100">
+        :
+        <button onClick={handleLogout} className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100">
           Logout
-        </Link>
+        </button>}
+
         <Link to='/register' className="btn btn-sm text-sm md:text-lg bg-gray-200 text-orange-500 hover:bg-green-100 md:ml-4">
           Register
-
-          
         </Link>
+
+
         <details className="dropdown dropdown-end dropdown-bottom ">
         
           <summary className="btn btn-sm bg-purple-200 m-1 text-sm md:text-lg hover:bg-purple-600 hover:text-white">
@@ -77,6 +89,7 @@ const Navbar = () => {
           </summary>
           <ul className="menu bg-green-50 dropdown-content  rounded-box z-[1] w-52 p-2 shadow">
             <Link to='/my-artifacts' className='bg-orange-50 font-semibold p-2 rounded-t-xl hover:bg-yellow-200'>My Artifacts (Private/Protected Route)</Link>
+
             <Link to='/my-liked' className='bg-orange-50 font-semibold p-2 rounded-b-xl hover:bg-yellow-200'>Liked Artifacts (Private/Protected Route)</Link>
           </ul>
         </details>

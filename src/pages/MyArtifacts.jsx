@@ -8,7 +8,7 @@ const MyArtifacts = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my-artifacts?email=${user.email}`)
+    fetch(`http://localhost:5000/my-artifacts?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setMyArtifacts(data);
