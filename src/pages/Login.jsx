@@ -1,10 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import googleIcon from '../assets/googleIcon.png'
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
   const navigate= useNavigate();
+  const location= useLocation();
+  const from= location.state || '/';
   const {googleLogin,emailPasswordLogin}= useContext(AuthContext)
     const handleLogin=e=>{
         e.preventDefault();
@@ -14,7 +16,7 @@ const Login = () => {
         emailPasswordLogin(email, password)
         .then(data=>{
           console.log(data.user);
-          // navigate('/')
+          navigate(from)
         })
         
         
@@ -25,6 +27,10 @@ const Login = () => {
 
     const handleGoogleLogin=()=>{
           googleLogin()
+          .then(data=>{
+            console.log(data.user);
+            navigate(from)
+          })
     }
 
     return (
