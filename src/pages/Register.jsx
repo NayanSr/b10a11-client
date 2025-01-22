@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import auth from "../firebase/firebase.config";
 
 const Register = () => {
   const {emailPasswordRegistration}= useContext(AuthContext)
@@ -16,7 +18,14 @@ const Register = () => {
       if(regex){
         alert(`Right Password, ${password}, Now can register & replace this alert by sweet alert`);
         emailPasswordRegistration(email,password)
+       
+        
+
         .then(data=>{
+
+          updateProfile(auth.currentUser,{
+            displayName:name,photoURL:photo
+          })
           console.log(data.user);
         })
         return;
@@ -25,12 +34,14 @@ const Register = () => {
         alert(`${password}, Wrong Password`)
         return;
       }
-   
     }
 
 
+
+
+
     return (
-        <div className="min-h-screen flex items-center justify-center ">
+        <div className="min-h-screen flex items-center justify-center py-4 ">
       <div className="w-full max-w-sm bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-2xl font-bold text-center mb-6">Register</h1>
 

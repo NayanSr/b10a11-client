@@ -18,7 +18,7 @@ const handleLogout=()=>{
     <>
       <NavLink className='text-lg ml-4 px-3 py-1' to='/'>Home</NavLink>
       <NavLink className='text-lg ml-4 px-3 py-1' to='/allArtifacts'>All Artifacts</NavLink>
-      <NavLink className='text-lg ml-4 px-3 py-1' to='/addArtifacts'>Add Artifacts (Private/Protected Route)</NavLink>
+      <NavLink className='text-lg ml-4 px-3 py-1' to='/addArtifacts'>Add Artifacts</NavLink>
       
     </>
   );
@@ -88,9 +88,9 @@ const handleLogout=()=>{
             Profile
           </summary>
           <ul className="menu bg-green-50 dropdown-content  rounded-box z-[1] w-52 p-2 shadow">
-            <Link to='/my-artifacts' className='bg-orange-50 font-semibold p-2 rounded-t-xl hover:bg-yellow-200'>My Artifacts (Private/Protected Route)</Link>
+            <Link to='/my-artifacts' className='bg-orange-50 font-semibold p-2 rounded-t-xl hover:bg-yellow-200'>My Artifacts</Link>
 
-            <Link to='/my-liked' className='bg-orange-50 font-semibold p-2 rounded-b-xl hover:bg-yellow-200'>Liked Artifacts (Private/Protected Route)</Link>
+            <Link to='/my-liked' className='bg-orange-50 font-semibold p-2 rounded-b-xl hover:bg-yellow-200'>Liked Artifacts</Link>
           </ul>
         </details>
       </div>

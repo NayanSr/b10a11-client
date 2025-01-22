@@ -22,8 +22,8 @@ const router= createBrowserRouter([
             {path:'/:id', element:<ArtifactsDetails/>,
                 loader:({params})=>fetch(`http://localhost:5000/allArtifacts/${params.id}`)
             },
-            {path:'my-artifacts', element:<MyArtifacts/>},
-            {path:'my-liked', element:<LikedArtifacts/>},
+            {path:'my-artifacts', element:<PrivateRoute><MyArtifacts/></PrivateRoute>},
+            {path:'my-liked', element:<PrivateRoute><LikedArtifacts/></PrivateRoute>},
             {path:'addArtifacts', element:<PrivateRoute><AddArtifacts/></PrivateRoute>},
             {path:`updateArtifact/:id`, element:<UpdateArtifact/>},
             {path:'login', element:<Login/>},
