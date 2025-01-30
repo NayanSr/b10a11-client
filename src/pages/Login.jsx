@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import googleIcon from '../assets/googleIcon.png'
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const navigate= useNavigate();
@@ -15,8 +16,25 @@ const Login = () => {
         const password= form.password.value;
         emailPasswordLogin(email, password)
         .then(data=>{
-          console.log(data.user);
+          // console.log(data.user);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Login successful!",
+            showConfirmButton: false,
+            timer: 1500
+          });
           navigate(from)
+        })
+        .catch(error=>{
+          // console.log(error.message);
+          Swal.fire({
+            title: "Error",
+            text: "Email or Password is incorrect. Please try again.",
+            icon: "error",
+            confirmButtonText: "OK",
+            draggable: true,
+          });
         })
         
         
@@ -28,7 +46,14 @@ const Login = () => {
     const handleGoogleLogin=()=>{
           googleLogin()
           .then(data=>{
-            console.log(data.user);
+            // console.log(data.user);
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Login successful!",
+              showConfirmButton: false,
+              timer: 1500
+            });
             navigate(from)
           })
     }

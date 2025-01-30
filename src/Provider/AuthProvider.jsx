@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
     //! Email Password Login
     const emailPasswordLogin= (email,password)=>{
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password)
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     //! Log Out
@@ -42,6 +42,7 @@ const AuthProvider = ({children}) => {
         return signOut(auth);
     } 
 
+ 
 
     const authInfo={user,loading, googleLogin,emailPasswordRegistration,emailPasswordLogin, logout};
 

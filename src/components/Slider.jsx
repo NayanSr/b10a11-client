@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 
 const Slider = () => {
     const slides = [
-        "https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp",
-        "https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp",
-        "https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp",
-        "https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp",
+        "https://i.ibb.co.com/m6jTdh9/Capture3.jpg",
+        "https://i.ibb.co.com/n8Bk31k/Ancient-Artifacts-Header-1536x400.jpg",
+        "https://i.ibb.co.com/dQjNGjn/Capture2.jpg",
+        "https://i.ibb.co.com/b3k5r8q/Capture1.jpg",
+        "https://i.ibb.co.com/VL72vYx/Ancient-Egypt.jpg",
       ];
       const [currentSlide, setCurrentSlide] = useState(0);
     
       useEffect(() => {
         const interval = setInterval(() => {
           setCurrentSlide((prev) => (prev + 1) % slides.length); // Cycle through slides
-        }, 3000); // Change slide every 3 seconds
+        }, 7000); // Change slide every 3 seconds
     
         return () => clearInterval(interval); // Cleanup interval on component unmount
       }, [slides.length]);
@@ -26,7 +27,7 @@ const Slider = () => {
                 index === currentSlide ? "block" : "hidden"
               }`}
             >
-              <img src={slide} className="w-full" alt={`Slide ${index + 1}`} />
+              <img src={slide} className="w-full h-[300px] object-cover" alt={`Slide ${index + 1}`} />
               <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
                 <button
                   className="btn btn-circle"

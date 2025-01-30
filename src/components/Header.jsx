@@ -6,12 +6,11 @@ import { AuthContext } from '../Provider/AuthProvider';
 const Header = () => {
 const {user}= useContext(AuthContext);
     return (
-        <div>
+        <div className='mb-4'>
            <Navbar/>
-           {/* <Slider/> */}
-           <br />
-           <h2>Name: {user?.displayName}</h2>
-           <br />
+           
+            <Slider />
+           
         </div>
     );
 };

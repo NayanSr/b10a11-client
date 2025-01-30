@@ -1,42 +1,61 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const UpdateArtifact = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [artifact, setArtifact] = useState([]);
-  const {user}= useContext(AuthContext)
-  const handleUpdateArtifacts=e=>{
+  const { user } = useContext(AuthContext);
+  const handleUpdateArtifacts = (e) => {
     e.preventDefault();
-    const form= e.target;
-    const name= form.name.value;
-    const photo= form.photo.value;
-    const artifactType= form.artifactType.value;
-    const historicalContext= form.historicalContext.value;
-    const createdAt= form.createdAt.value;
-    const discoveredAt= form.discoveredAt.value;
-    const presentLocation= form.presentLocation.value;
-    const addedBy= {name:` ${user?.displayName}`, email:` ${user?.email} `};
-    const adderPersonEmail= `${user?.email}`
-    const data= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation,addedBy,adderPersonEmail,like:0};
-    console.log(data);
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const artifactType = form.artifactType.value;
+    const historicalContext = form.historicalContext.value;
+    const createdAt = form.createdAt.value;
+    const discoveredAt = form.discoveredAt.value;
+    const presentLocation = form.presentLocation.value;
+    const addedBy = {
+      name: ` ${user?.displayName}`,
+      email: ` ${user?.email} `,
+    };
+    const adderPersonEmail = `${user?.email}`;
+    const data = {
+      name,
+      photo,
+      artifactType,
+      historicalContext,
+      createdAt,
+      discoveredAt,
+      presentLocation,
+      addedBy,
+      adderPersonEmail,
+      like: 0,
+    };
+    // console.log(data);
 
-    fetch(`http://localhost:5000/allArtifacts/${artifact._id}`,{
-        method:'PUT',
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify(data)
+    fetch(`https://b10a11-server.vercel.app/allArtifacts/${artifact._id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data),
     })
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data);
-        //TODO: use an sweet alert
-        alert('Updated successfully')
-    })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire({
+          title: "Updated Successfully",
+          icon: "success",
+          draggable: true,
+        });
 
+        navigate("/");
+      });
+  };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allArtifacts/${id}`)
+    fetch(`https://b10a11-server.vercel.app/allArtifacts/${id}`)
       .then((res) => res.json())
       .then((data) => setArtifact(data));
   }, []);
@@ -63,8 +82,8 @@ const UpdateArtifact = () => {
               type="text"
               name="name"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            //   placeholder="Enter Artifact Name"
-            defaultValue={artifact.name}
+              //   placeholder="Enter Artifact Name"
+              defaultValue={artifact.name}
             />
           </div>
 
@@ -80,8 +99,8 @@ const UpdateArtifact = () => {
               type="url"
               name="photo"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            //   placeholder="Artifact Image URL"
-            defaultValue={artifact.photo}
+              //   placeholder="Artifact Image URL"
+              defaultValue={artifact.photo}
             />
           </div>
 
@@ -96,8 +115,10 @@ const UpdateArtifact = () => {
             <select
               name="artifactType"
               className="select select-accent w-full "
+              defaultValue='defaultly'
             >
               {/* <option disabled selected>Dark mode or light mode?</option> */}
+              <option>{artifact.artifactType}</option>
               <option>Tools</option>
               <option>Weapons</option>
               <option>Documents</option>
@@ -117,8 +138,8 @@ const UpdateArtifact = () => {
               type="text"
               name="historicalContext"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            //   placeholder="Enter Historical Context"
-            defaultValue={artifact.historicalContext}
+              //   placeholder="Enter Historical Context"
+              defaultValue={artifact.historicalContext}
             />
           </div>
 
@@ -134,8 +155,8 @@ const UpdateArtifact = () => {
               type="text"
               name="createdAt"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            //   placeholder="Enter Created At"
-            defaultValue={artifact.createdAt}
+              //   placeholder="Enter Created At"
+              defaultValue={artifact.createdAt}
             />
           </div>
 
@@ -151,8 +172,8 @@ const UpdateArtifact = () => {
               type="text"
               name="discoveredAt"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            //   placeholder="Enter Discovered At"
-            defaultValue={artifact.discoveredAt}
+              //   placeholder="Enter Discovered At"
+              defaultValue={artifact.discoveredAt}
             />
           </div>
 
@@ -168,8 +189,8 @@ const UpdateArtifact = () => {
               type="text"
               name="presentLocation"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            //   placeholder="Enter Present Location"
-            defaultValue={artifact.presentLocation}
+              //   placeholder="Enter Present Location"
+              defaultValue={artifact.presentLocation}
             />
           </div>
 

@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddArtifacts = () => {
-  const {user}= useContext(AuthContext)
+  const {user}= useContext(AuthContext);
+  const navigate= useNavigate();
   const handleAddArtifacts = (e) => {
     e.preventDefault();
     // name,photo,artifactType,historicalContext,createdAt,discoveredAt,presentLocation
@@ -17,10 +20,10 @@ const AddArtifacts = () => {
     const addedBy= {name:` ${user?.displayName}`, email:` ${user?.email} `};
     const addedPersonEmail= `${user?.email}`
     const data= {name, photo, artifactType, historicalContext, createdAt, discoveredAt, presentLocation,addedBy,addedPersonEmail,like:0};
-    console.log(data);
+    // console.log(data);
 
     // !POST operation
-    fetch('http://localhost:5000/allArtifacts',{
+    fetch('https://b10a11-server.vercel.app/allArtifacts',{
       method:'POST',
       headers:{'content-type': 'application/json'},
       body: JSON.stringify(data)
@@ -28,9 +31,15 @@ const AddArtifacts = () => {
     .then(res=>res.json())
     .then(data=>{
       if(data.insertedId){
-        alert('insrted data successfully')
+        Swal.fire({
+          title: "Added Artifact Successfully",
+          icon: "success",
+          draggable: true
+        });
       }
-      console.log(data)})
+      navigate('/')
+      // console.log(data)
+    })
   };
   
   return (
@@ -53,6 +62,7 @@ const AddArtifacts = () => {
               name="name"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter Artifact Name"
+              required
             />
           </div>
 
@@ -70,6 +80,7 @@ const AddArtifacts = () => {
               name="photo"
               className="select-accent w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Artifact Image URL"
+              required
             />
           </div>
 

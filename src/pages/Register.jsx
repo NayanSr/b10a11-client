@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const {emailPasswordRegistration}= useContext(AuthContext)
+  const {emailPasswordRegistration}= useContext(AuthContext);
+  const navigate= useNavigate();
 
     const handleRegisterSubmit=e=>{
       e.preventDefault();
@@ -16,22 +18,32 @@ const Register = () => {
       const password= form.password.value;
       const regex =(/^(?=.*[A-Z])(?=.*[a-z]).{6,}$/).test(password);
       if(regex){
-        alert(`Right Password, ${password}, Now can register & replace this alert by sweet alert`);
         emailPasswordRegistration(email,password)
-       
-        
-
         .then(data=>{
-
           updateProfile(auth.currentUser,{
             displayName:name,photoURL:photo
           })
-          console.log(data.user);
+          Swal.fire({
+                       position: "top-end",
+                       icon: "success",
+                       title: "Registration successful!",
+                       showConfirmButton: false,
+                       timer: 1500
+                     });
+          // console.log(data.user);
         })
+        navigate('/')
         return;
       }
       else{
-        alert(`${password}, Wrong Password`)
+        Swal.fire({
+          title: "Error",
+          text: "Password should be at least 6 characters long with one uppercase and one lowercase letter.",
+          icon: "error",
+          confirmButtonText: "OK",
+          draggable: true,
+        });
+
         return;
       }
     }

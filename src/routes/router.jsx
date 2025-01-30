@@ -10,27 +10,66 @@ import MyArtifacts from "../pages/MyArtifacts";
 import LikedArtifacts from "../pages/LikedArtifacts";
 import UpdateArtifact from "../pages/UpdateArtifact";
 import PrivateRoute from "./PrivateRoute";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
+// const {serverLive}= useContext(AuthContext);
+// console.log(serverLive);
 
-const router= createBrowserRouter([
-    {path:'/', element:<MainLayout/>,
-        children:[
-            {path:'/', element:<Home/>, 
-                loader:()=>fetch('http://localhost:5000/top-six')},
-            {path:'allArtifacts', element:<AllArtifacts/>, 
-                loader:()=>fetch('http://localhost:5000/allArtifacts')},
-            {path:'/:id', element:<ArtifactsDetails/>,
-                loader:({params})=>fetch(`http://localhost:5000/allArtifacts/${params.id}`)
-            },
-            {path:'my-artifacts', element:<PrivateRoute><MyArtifacts/></PrivateRoute>},
-            {path:'my-liked', element:<PrivateRoute><LikedArtifacts/></PrivateRoute>},
-            {path:'addArtifacts', element:<PrivateRoute><AddArtifacts/></PrivateRoute>},
-            {path:`updateArtifact/:id`, element:<UpdateArtifact/>},
-            {path:'login', element:<Login/>},
-            {path:'register', element:<Register/>},
-        ]
-    }
-])
-
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+        loader: () => fetch("https://b10a11-server.vercel.app/top-six"),
+      },
+      {
+        path: "allArtifacts",
+        element: <AllArtifacts />,
+        loader: () => fetch("https://b10a11-server.vercel.app/allArtifacts"),
+      },
+      {
+        path: "/:id",
+        element: (
+          <PrivateRoute>
+            <ArtifactsDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://b10a11-server.vercel.app/allArtifacts/${params.id}`),
+      },
+      {
+        path: "my-artifacts",
+        element: (
+          <PrivateRoute>
+            <MyArtifacts />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-liked",
+        element: (
+          <PrivateRoute>
+            <LikedArtifacts />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addArtifacts",
+        element: (
+          <PrivateRoute>
+            <AddArtifacts />
+          </PrivateRoute>
+        ),
+      },
+      { path: `updateArtifact/:id`, element: <UpdateArtifact /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+    ],
+  },
+]);
 
 export default router;

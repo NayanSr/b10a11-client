@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import likeThumb from "../assets/like.png";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const ArtifactsDetails = () => {
   const data = useLoaderData();
@@ -24,19 +25,19 @@ const ArtifactsDetails = () => {
   // const [likedArtifacts, setLikedArtifacts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/all-liked")
+    fetch("https://b10a11-server.vercel.app/all-liked")
       .then((res) => res.json())
       .then(async (data) => {
         // setLikedArtifacts(data);
-        console.log(user);
-        console.log(data);
+        // console.log(user);
+        // console.log(data);
         const checkId= data.filter((sd) => sd.artifactsId == _id);
-        console.log(checkId);
+        // console.log(checkId);
         // const check= await checkId?.email == user?.email
         const check= await checkId?.find(sd=>sd.email == user?.email)
         setIsExist(check);
 
-        console.log(isExist, 'check: ',check);
+        // console.log(isExist, 'check: ',check);
       });
   }, [user?.email, newCount,_id]);
 
@@ -48,7 +49,7 @@ const ArtifactsDetails = () => {
       photo,
       email: `${user.email}`,
     };
-    fetch("http://localhost:5000/all-liked", {
+    fetch("https://b10a11-server.vercel.app/all-liked", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(dataToServer),
@@ -56,12 +57,16 @@ const ArtifactsDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          alert("data added. now increase like count");
+           Swal.fire({
+                    title: "Thanks for liking the artifact",
+                    icon: "success",
+                    draggable: true,
+                  });
         }
       });
 
     //! patch current artifact like count
-    fetch(`http://localhost:5000/allArtifacts/${_id}`, {
+    fetch(`https://b10a11-server.vercel.app/allArtifacts/${_id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
     })
