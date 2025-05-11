@@ -7,7 +7,7 @@ const AllArtifacts = () => {
     const allArtifacts= useLoaderData();
 
     return (
-        <div>
+        <div className='my-4'>
             
 <h2 className='text-2xl my-6 ml-4'>Total Artifacts: {allArtifacts.length} </h2>
 

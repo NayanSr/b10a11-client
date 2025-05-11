@@ -7,9 +7,15 @@ const Header = () => {
 const {user}= useContext(AuthContext);
     return (
         <div className='mb-4'>
+            <div className=' bg-purple-200'>
+
            <Navbar/>
+            </div>
            
+           <div className='max-w-[1400px] mx-auto'>
+
             <Slider />
+           </div>
            
         </div>
     );
