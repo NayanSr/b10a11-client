@@ -17,6 +17,10 @@ This site is for Historical Artifacts information site. Here a person can see al
 - Protected environment variable
 - Deployed client site in firebase and server site in vercel
 
+  ## How to use:
+  #Install dependencies
+  -npm install
+
 
 ## Key Features
 1. **Route**: Can go to different route by clicking link.
