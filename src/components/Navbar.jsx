@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../components/css/nav.css";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import DarkTheam from "./DarkTheam";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -117,6 +118,7 @@ const Navbar = () => {
             </Link>
           </ul>
         </details>
+          <DarkTheam/>
       </div>
       </div>
 

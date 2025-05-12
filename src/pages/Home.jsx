@@ -11,6 +11,7 @@ const Home = () => {
   // console.log(user);
   return (
     <div className="">
+      
       {/* <Slider /> */}
 
       {topSixData.length ? (
@@ -25,7 +26,7 @@ const Home = () => {
         <NoData />
       )}
 
-    <div className="text-center text-lg font-semibold mt-8 mb-4"><Link to='/allArtifacts' className="bg-purple-200 border-2 border-green-800 px-4 py-1 rounded-md ">Show all Artifacts</Link></div>
+    <div className="text-center text-lg font-semibold mt-8 mb-4"><Link to='/allArtifacts' className="bg-emerald-600 border-2 border-green-800 px-4 py-1 rounded-md ">Show all Artifacts</Link></div>
     </div>
   );
 };
