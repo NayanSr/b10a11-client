@@ -12,6 +12,8 @@ import UpdateArtifact from "../pages/UpdateArtifact";
 import PrivateRoute from "./PrivateRoute";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import About from "../components/About";
+import Contact from "../components/Contact";
 
 // const {serverLive}= useContext(AuthContext);
 // console.log(serverLive);
@@ -68,6 +70,8 @@ const router = createBrowserRouter([
       { path: `updateArtifact/:id`, element: <UpdateArtifact /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      {path:"about",element:<About/>},
+      {path:"contact",element:<Contact/>}
     ],
   },
 ]);

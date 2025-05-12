@@ -15,12 +15,12 @@ const Footer = () => {
     
               {/* Right Section: Links */}
               <div className="flex space-x-6">
-                <a href="#" className="text-gray-400 hover:text-white transition duration-300">
+                <Link to="/about" className="text-gray-400 hover:text-white transition duration-300">
                   About
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition duration-300">
+                </Link>
+                <Link to="contact" className="text-gray-400 hover:text-white transition duration-300">
                   Contact
-                </a>
+                </Link>
                 <a href="#" className="text-gray-400 hover:text-white transition duration-300">
                   Privacy Policy
                 </a>
