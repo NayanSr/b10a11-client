@@ -3,58 +3,60 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import loginPhoto from '../assets/login.jpg'
 import Swal from "sweetalert2";
 
 const Register = () => {
-  const {emailPasswordRegistration}= useContext(AuthContext);
-  const navigate= useNavigate();
+  const { emailPasswordRegistration } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const handleRegisterSubmit=e=>{
-      e.preventDefault();
-      const form= e.target;
-      const name= form.name.value;
-      const photo= form.photo.value;
-      const email= form.email.value;
-      const password= form.password.value;
-      const regex =(/^(?=.*[A-Z])(?=.*[a-z]).{6,}$/).test(password);
-      if(regex){
-        emailPasswordRegistration(email,password)
-        .then(data=>{
-          updateProfile(auth.currentUser,{
-            displayName:name,photoURL:photo
-          })
-          Swal.fire({
-                       position: "top-end",
-                       icon: "success",
-                       title: "Registration successful!",
-                       showConfirmButton: false,
-                       timer: 1500
-                     });
-          // console.log(data.user);
-        })
-        navigate('/')
-        return;
-      }
-      else{
-        Swal.fire({
-          title: "Error",
-          text: "Password should be at least 6 characters long with one uppercase and one lowercase letter.",
-          icon: "error",
-          confirmButtonText: "OK",
-          draggable: true,
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/.test(password);
+    if (regex) {
+      emailPasswordRegistration(email, password).then((data) => {
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
         });
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Registration successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // console.log(data.user);
+      });
+      navigate("/");
+      return;
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "Password should be at least 6 characters long with one uppercase and one lowercase letter.",
+        icon: "error",
+        confirmButtonText: "OK",
+        draggable: true,
+      });
 
-        return;
-      }
+      return;
     }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center md:w-[780px] justify-center py-4 ">
 
 
+      <div className=" w-1/2  -mr-3  hidden md:block">
+              <img className="h-[510px]" src={loginPhoto} alt="Login Photo" />
+            </div>
 
-
-
-    return (
-        <div className="min-h-screen flex items-center justify-center py-4 ">
-      <div className="w-full max-w-sm bg-white shadow-lg rounded-lg p-6">
+      <div className="sm:w-[380px] md:w-1/2  md:h-[510px] max-w-sm bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-2xl font-bold text-center mb-6">Register</h1>
 
         <form onSubmit={handleRegisterSubmit}>
@@ -128,7 +130,7 @@ const Register = () => {
         </form>
 
         <div className="mt-4 text-center">
-          <p>
+          <p className="text-black">
             Already have an account?{" "}
             <Link to="/login" className="text-blue-500 hover:underline">
               Login
@@ -137,7 +139,7 @@ const Register = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default Register;
