@@ -38,7 +38,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar max-w-[1400px] mx-auto rounded-t-md">
+    <div className="navbar max-w-[1400px] mx-auto rounded-t-md ">
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -74,7 +74,7 @@ const Navbar = () => {
           )}
         </div>
 
-        <Link to="/" className="text-lg lg:text-2xl font-bold text-orange-900">
+        <Link to="/" className="text-lg lg:text-2xl font-bold text-orange-500">
           Legacy Tracker
         </Link>
       </div>

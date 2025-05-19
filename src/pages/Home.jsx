@@ -4,6 +4,8 @@ import { Link, useLoaderData } from "react-router-dom";
 import ArtifactsCart from "../components/ArtifactsCart";
 import NoData from "../components/NoData";
 import { AuthContext } from "../Provider/AuthProvider";
+import News from "../components/News";
+import Reviews from "../components/Reviews";
 
 const Home = () => {
   const topSixData = useLoaderData();
@@ -27,6 +29,21 @@ const Home = () => {
       )}
 
     <div className="text-center text-lg font-semibold mt-8 mb-4"><Link to='/allArtifacts' className="bg-emerald-600 border-2 border-green-800 px-4 py-1 rounded-md ">Show all Artifacts</Link></div>
+
+
+
+
+<div>
+  <News/>
+</div>
+
+<div>
+  <Reviews/>
+</div>
+
+
+
+
     </div>
   );
 };
